@@ -6,6 +6,7 @@ import { ActorResolver } from "./resolvers/ActorResolver";
 import { CityResolver } from "./resolvers/CityResolver";
 import { CountryResolver } from "./resolvers/CountryResolver";
 import { AddressResolver } from "./resolvers/AddressResolver";
+import { CategoryResolver } from "./resolvers/CategoryResolver";
 
 async function main() {
     await createConnection();
@@ -13,6 +14,7 @@ async function main() {
         resolvers: [
             ActorResolver,
             AddressResolver,
+            CategoryResolver,
             CityResolver,
             CountryResolver
         ]
