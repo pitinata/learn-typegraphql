@@ -51,7 +51,7 @@ export class Film extends BaseEntity{
     @Column({type: 'timestamp without time zone'})
     last_update: Date;
 
-    @Field(() => Array<String>())
+    @Field(() => [String])
     @Column({type: 'text', array: true})
     special_features: string[];
     
