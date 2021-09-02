@@ -5,12 +5,14 @@ import { buildSchema } from "type-graphql";
 import { ActorResolver } from "./resolvers/ActorResolver";
 import { CityResolver } from "./resolvers/CityResolver";
 import { CountryResolver } from "./resolvers/CountryResolver";
+import { AddressResolver } from "./resolvers/AddressResolver";
 
 async function main() {
     await createConnection();
     const schema = await buildSchema({
         resolvers: [
             ActorResolver,
+            AddressResolver,
             CityResolver,
             CountryResolver
         ]

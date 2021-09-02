@@ -14,7 +14,7 @@ export class Address extends BaseEntity{
     @Column({length: 50})
     address: string;
 
-    @Field(() => String)
+    @Field(() => String, {nullable: true})
     @Column({length: 50})
     address2: string;
 
