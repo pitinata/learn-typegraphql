@@ -7,6 +7,7 @@ import { CityResolver } from "./resolvers/CityResolver";
 import { CountryResolver } from "./resolvers/CountryResolver";
 import { AddressResolver } from "./resolvers/AddressResolver";
 import { CategoryResolver } from "./resolvers/CategoryResolver";
+import { CustomerResolver } from "./resolvers/CustomerResolver";
 
 async function main() {
     await createConnection();
@@ -16,7 +17,8 @@ async function main() {
             AddressResolver,
             CategoryResolver,
             CityResolver,
-            CountryResolver
+            CountryResolver,
+            CustomerResolver
         ]
     });
     const server = new ApolloServer({schema});
