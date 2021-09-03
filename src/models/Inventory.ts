@@ -21,4 +21,6 @@ export class Inventory extends BaseEntity{
     last_update: Date;
 
     
+
+    
 }

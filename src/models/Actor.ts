@@ -22,6 +22,7 @@ export class Actor extends BaseEntity{
     @Column({type: 'timestamp without time zone', default: Date.now()})
     last_update: Date;
 
+    @Field(() => [Film])
     @ManyToMany(() => Film)
     @JoinTable({name: 'film_actor', joinColumn: {
         name: 'actor_id',
@@ -30,5 +31,5 @@ export class Actor extends BaseEntity{
         name: 'film_id',
         referencedColumnName: 'film_id'
     }})
-    films: Film[];
+    films: Promise<Film[]>;
 }

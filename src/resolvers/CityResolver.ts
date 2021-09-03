@@ -8,13 +8,6 @@ import { Country } from "../models/Country";
 @Resolver(of => City)
 export class CityResolver{
 
-    @FieldResolver()
-    country(@Root() city: City){
-        const country = Country.findOne({where: {country_id: city.country_id}});
-        if(!country) throw new Error('Country not found!');
-        return country;
-    }
-
     @Query(() => [City])
     cities(){
         return City.find();

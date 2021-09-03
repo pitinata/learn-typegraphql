@@ -1,9 +1,12 @@
-import { Arg, Info, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, FieldResolver, Info, Mutation, Query, Resolver, Root } from "type-graphql";
+import { In } from "typeorm";
 import { CreateActorInput } from "../inputs/CreateActorInput";
 import { UpdateActorInput } from "../inputs/UpdateActorInput";
 import { Actor } from "../models/Actor";
+import { Film } from "../models/Film";
+import { FilmActor } from "../models/FilmActor";
 
-@Resolver()
+@Resolver(of => Actor)
 export class ActorResolver {
     @Query(() => [Actor])
     actors(){

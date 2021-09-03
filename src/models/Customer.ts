@@ -12,7 +12,6 @@ export class Customer extends BaseEntity{
     @PrimaryGeneratedColumn()
     customer_id: number;
     
-    @Field(() => Number)
     @Column({type: 'smallint'})
     store_id: number;
 
@@ -28,7 +27,6 @@ export class Customer extends BaseEntity{
     @Column({length: 50})
     email: string;
 
-    @Field(() => Number)
     @Column({type: 'smallint'})
     address_id: number;
 
@@ -48,18 +46,25 @@ export class Customer extends BaseEntity{
     @Column()
     active: number;
     
-    @ManyToOne(() => Store, store => store.customers)
+    @Field(() => Store)
+    @ManyToOne(() => Store, store => store.customers, {
+        eager: true
+    })
     @JoinColumn({
         name: "store_id", referencedColumnName: "store_id"
     })
     store: Store;
 
-    @OneToOne(() => Address)
+    @Field(() => Address)
+    @OneToOne(() => Address, {
+        eager: true
+    })
     @JoinColumn({
         name: 'address_id', referencedColumnName: 'address_id'
     })
     address: Address;
 
+    @Field(() => Payment)
     @OneToMany(() => Payment, payment => payment.customer)
-    payments: Payment[];
+    payments: Promise<Payment[]>;
 }

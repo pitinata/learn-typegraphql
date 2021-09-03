@@ -22,7 +22,6 @@ export class Address extends BaseEntity{
     @Column({length: 20})
     district: string;
 
-    @Field(() => Number)
     @Column()
     city_id: number;
 
@@ -38,7 +37,10 @@ export class Address extends BaseEntity{
     @Column({type: 'timestamp without time zone'})
     last_update: Date;
 
-    @ManyToOne(() => City, city => city.addresses)
+    @Field(() => City)
+    @ManyToOne(() => City, city => city.addresses, {
+        eager: true
+    })
     @JoinColumn([
         {name: 'city_id', referencedColumnName: 'city_id'}
     ])

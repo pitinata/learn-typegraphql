@@ -20,6 +20,6 @@ export class Country extends BaseEntity{
 
     @Field(() => [City])
     @OneToMany(() => City, city => city.country)
-    cities: City[];
+    cities: Promise<City[]>;
     
 }

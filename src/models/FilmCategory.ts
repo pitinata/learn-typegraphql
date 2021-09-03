@@ -17,10 +17,5 @@ export class FilmCategory extends BaseEntity{
     @Field(() => Date)
     @Column({type: 'timestamp without time zone'})
     last_update: Date;
-
-    @ManyToOne(() => Category, category => category.film_categories)
-    @JoinColumn([
-        {name: 'category_id', referencedColumnName: 'category_id'}
-    ])
-    category: Category;
+    
 }

@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from "type-graphql";
 import { BaseEntity, Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Category } from "./Category";
 import { Language } from "./Language";
 import { Store } from "./Store";
 
@@ -74,5 +75,16 @@ export class Film extends BaseEntity{
         referencedColumnName: 'store_id'
     }})
     store: Store;
+
+    @Field(() => [Category])
+    @ManyToMany(() => Category)
+    @JoinTable({name: 'film_category', joinColumn: {
+        name: 'film_id',
+        referencedColumnName: 'film_id'
+    }, inverseJoinColumn: {
+        name: 'category_id',
+        referencedColumnName: 'category_id'
+    }})
+    categories: Promise<Category[]>;
 
 }
