@@ -27,11 +27,9 @@ export class City extends BaseEntity{
     addresses: Promise<Address[]>;
 
     @Field(() => Country)
-    @ManyToOne(() => Country, country => country.cities,{
-        eager: true
-    })
+    @ManyToOne(() => Country, country => country.cities)
     @JoinColumn([
         {name: 'country_id', referencedColumnName: 'country_id'}
     ])
-    country: Country;
+    country: Promise<Country>;
 }

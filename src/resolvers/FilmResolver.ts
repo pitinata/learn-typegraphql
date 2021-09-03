@@ -3,6 +3,7 @@ import { CreateFilmInput } from "../inputs/CreateFilmInput";
 import { UpdateCustomerInput } from "../inputs/UpdateCustomerInput";
 import { UpdateFilmInput } from "../inputs/UpdateFilmInput";
 import { Film } from "../models/Film";
+import { Inventory } from "../models/Inventory";
 
 @Resolver(of => Film)
 export class FilmResolver{

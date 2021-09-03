@@ -38,11 +38,9 @@ export class Address extends BaseEntity{
     last_update: Date;
 
     @Field(() => City)
-    @ManyToOne(() => City, city => city.addresses, {
-        eager: true
-    })
+    @ManyToOne(() => City, city => city.addresses)
     @JoinColumn([
         {name: 'city_id', referencedColumnName: 'city_id'}
     ])
-    city: City;
+    city: Promise<City>;
 }

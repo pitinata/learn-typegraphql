@@ -1,6 +1,8 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { BaseEntity, Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Actor } from "./Actor";
 import { Category } from "./Category";
+import { Inventory } from "./Inventory";
 import { Language } from "./Language";
 import { Store } from "./Store";
 
@@ -60,21 +62,30 @@ export class Film extends BaseEntity{
     @Column({type: 'tsvector'})
     fulltext: string;
 
+    @Field(() => [Actor])
+    @ManyToMany(() => Actor)
+    @JoinTable({name: 'film_actor', joinColumn: {
+        name: 'film_id',
+        referencedColumnName: 'film_id'
+    }, inverseJoinColumn: {
+        name: 'actor_id',
+        referencedColumnName: 'actor_id'
+    }})
+    actors: Promise<Actor[]>;
+
+    @Field(() => [Language])
     @ManyToOne(() => Language, language => language.films)
     @JoinColumn([
         {name: 'language_id', referencedColumnName: 'language_id'}
     ])
-    language: Language;
+    language: Promise<Language>;
 
-    @ManyToMany(() => Store)
-    @JoinTable({name: 'inventory', joinColumn: {
-        name: 'film_id',
-        referencedColumnName: 'film_id'
-    }, inverseJoinColumn: {
-        name: 'store_id',
-        referencedColumnName: 'store_id'
-    }})
-    store: Store;
+    @Field(() => [Inventory])
+    @OneToMany(() => Inventory, inventory => inventory.film)
+    @JoinColumn({
+        name: "film_id", referencedColumnName: "film_id"
+    })
+    inventories: Promise<Inventory[]>;
 
     @Field(() => [Category])
     @ManyToMany(() => Category)
@@ -86,5 +97,9 @@ export class Film extends BaseEntity{
         referencedColumnName: 'category_id'
     }})
     categories: Promise<Category[]>;
+
+    
+
+
 
 }

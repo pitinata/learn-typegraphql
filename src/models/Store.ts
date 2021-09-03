@@ -1,7 +1,8 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { BaseEntity, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, JoinTable, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Address } from "./Address";
 import { Customer } from "./Customer";
+import { Inventory } from "./Inventory";
 import { Staff } from "./Staff";
 
 @Entity()
@@ -41,4 +42,8 @@ export class Store extends BaseEntity{
 
     @OneToMany(() => Customer, customer => customer.store)
     customers: Customer[];
+
+    @Field(() => [Inventory])
+    @OneToMany(() => Inventory, inventory => inventory.film)
+    inventories: Promise<Inventory[]>;
 }

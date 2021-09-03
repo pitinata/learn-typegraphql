@@ -56,13 +56,11 @@ export class Customer extends BaseEntity{
     store: Store;
 
     @Field(() => Address)
-    @OneToOne(() => Address, {
-        eager: true
-    })
+    @OneToOne(() => Address)
     @JoinColumn({
         name: 'address_id', referencedColumnName: 'address_id'
     })
-    address: Address;
+    address: Promise<Address>;
 
     @Field(() => Payment)
     @OneToMany(() => Payment, payment => payment.customer)

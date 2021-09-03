@@ -8,6 +8,7 @@ import { FilmActor } from "../models/FilmActor";
 
 @Resolver(of => Actor)
 export class ActorResolver {
+
     @Query(() => [Actor])
     actors(){
         return Actor.find();
